@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/books")
 @RestController
@@ -40,5 +42,18 @@ public class BookController {
     public List<Book> getAllBooks(){
         List<Book> allBooks = bookRepository.findAll();
         return allBooks;
+    }
+
+    @GetMapping(path = "{id}")
+    public Optional<Book> getBookById(@PathVariable Long id){
+        Optional<Book> book = bookRepository.findById(id);
+        return book;
+    }
+
+    @PostMapping(path = "/inCart")
+    public ResponseEntity getBooksInCart(@RequestBody GetBooksInCartWrapper requestWrapper){
+        List<Long> bookIdsInCart = requestWrapper.getBookIds();
+        List<Book> booksInCart = bookRepository.findAllById(bookIdsInCart);
+        return ResponseEntity.ok(booksInCart);
     }
 }
