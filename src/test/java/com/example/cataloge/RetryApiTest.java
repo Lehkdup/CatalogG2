@@ -25,6 +25,10 @@ public class RetryApiTest {
     private RetryService retryService;
 
     @Test
+    void contextLoads() {
+    }
+
+    @Test
     public void testRetryMechanism() throws Exception {
         when(retryService.callRetryApi())
                 .thenThrow(new RuntimeException("First attempt failed"))
