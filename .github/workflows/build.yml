@@ -38,7 +38,7 @@ jobs:
 
             - name: Tag Docker Image
               run: |
-                  docker tag catalog:0.0.1-SNAPSHOT koobe/order:latest
+                  docker tag cataloge:0.0.1-SNAPSHOT koobe/order:latest
 
             - name: Push Docker Image to Docker Hub
               run: |
