@@ -17,21 +17,29 @@ public class CatalogeApplication {
     }
 
     @PostConstruct
-    private void initializeBook() throws Exception{
-        Book book1 = new Book();
-        book1.setTitle("Start with WHY");
-        book1.setAuthor("Simon Sinek");
-        book1.setDescription("In this book, Simon shows that the leaders who’ve had the greatest influence in the world all think, act, and communicate the same way—and it’s the opposite of what everyone else does.");
-        book1.setISBN("978-0241958223");
-        bookRepository.save(book1);
+    private void initializeBook() throws Exception {
+        // Prüfen, ob bereits Bücher existieren
+        if (bookRepository.count() == 0) { // Alternativ: bookRepository.findAll().isEmpty()
+            // Erstes Buch initialisieren
+            Book book1 = new Book();
+            book1.setTitle("Start with WHY");
+            book1.setAuthor("Simon Sinek");
+            book1.setDescription("In this book, Simon shows that the leaders who’ve had the greatest influence in the world all think, act, and communicate the same way—and it’s the opposite of what everyone else does.");
+            book1.setISBN("978-0241958223");
+            bookRepository.save(book1);
 
-        Book book2 = new Book();
-        book2.setTitle("Give and Take");
-        book2.setAuthor("Adam Grant");
-        book2.setDescription("A Revolutionary Approach to Success, Adam Grant categorizes people into three types: givers, matchers, and takers.");
-        book2.setISBN("978-0670026555");
-        bookRepository.save(book2);
+            // Zweites Buch initialisieren
+            Book book2 = new Book();
+            book2.setTitle("Give and Take");
+            book2.setAuthor("Adam Grant");
+            book2.setDescription("A Revolutionary Approach to Success, Adam Grant categorizes people into three types: givers, matchers, and takers.");
+            book2.setISBN("978-0670026555");
+            bookRepository.save(book2);
 
+            System.out.println("Bücher wurden erfolgreich in die Datenbank eingefügt.");
+        } else {
+            System.out.println("Die Datenbank enthält bereits Bücher, Einfügen übersprungen.");
+        }
     }
 
 }
