@@ -31,3 +31,15 @@ jobs:
 
             -   name: Maven Build, Test, and Create Docker Image
                 run: mvn -B spring-boot:build-image
+
+            - name: Log in to Docker Hub
+              run: |
+                  echo "dckr_pat_GIau0so-XXTG0KZQyGd4OIEL9ig" | docker login -u "koobe" --password-stdin
+
+            - name: Tag Docker Image
+              run: |
+                  docker tag catalog:0.0.1-SNAPSHOT koobe/order:latest
+
+            - name: Push Docker Image to Docker Hub
+              run: |
+                  docker push koobe/catalog:latest
